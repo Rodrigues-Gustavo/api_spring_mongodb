@@ -20,13 +20,8 @@ public class UserService {
 		return iurepo.findAll();	
 	}
 	
-	public User findById(String id) {
-	    Optional<User> userOptional = iurepo.findById(id);
-	    
-	    if (userOptional.isPresent()) {
-	        return userOptional.get();
-	    } else {
-	        throw new ObjectNotFoundException("Object Not found");
-	    }
+	public User findById(String id) {		
+	    return iurepo.findById(id)
+	            .orElseThrow(() -> new ObjectNotFoundException("Object Not Found"));
 	}
 }
