@@ -29,6 +29,11 @@ public class UserService {
 		return iurepo.insert(obj);
 	}
 	
+	public void delete(String id) {
+		User userId = findById(id);
+		iurepo.delete(userId);
+	}
+	
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
