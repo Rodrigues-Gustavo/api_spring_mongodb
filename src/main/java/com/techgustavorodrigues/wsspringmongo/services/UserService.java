@@ -1,6 +1,7 @@
 package com.techgustavorodrigues.wsspringmongo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,20 @@ public class UserService {
 		iurepo.delete(userId);
 	}
 	
+	public User update(User obj) {
+		User newObj = iurepo.findById(obj.getId())
+                .orElseThrow(() -> new ObjectNotFoundException("Object Not Found"));
+		
+		updateData(newObj, obj);
+		return iurepo.save(newObj);
+	}
+	
+	private void updateData(User newObj, User obj) {
+		newObj.setName(obj.getName());
+		newObj.setEmail(obj.getEmail());
+		
+	}
+
 	public User fromDTO(UserDTO objDto) {
 		return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
 	}
