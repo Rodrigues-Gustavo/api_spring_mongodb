@@ -18,9 +18,4 @@ public class PostService {
 		return repo.findById(id)
 	            .orElseThrow(() -> new ObjectNotFoundException("Object Not Found"));
 	}
-	
-//    public Post save(Post post) {
-//    	System.out.print(post);
-//        return repo.save(post);
-//    }
 }
