@@ -14,7 +14,7 @@
 
  <h1 id="about"> 🌍 About </h1>
 
-The goal with this project was to better develop my Backend Developer skills and solidify my knowledge in Java, Spring boot and MongooDb
+The goal with this project was to better develop my Backend Developer skills and solidify my knowledge in Java, Spring boot and MongoDb
 </br></br>
 The challenge is to create a timer and it should have the following functionalities:
 </br></br>
