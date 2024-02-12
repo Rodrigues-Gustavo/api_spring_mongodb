@@ -21,6 +21,10 @@ import com.techgustavorodrigues.wsspringmongo.domain.User;
 import com.techgustavorodrigues.wsspringmongo.dto.UserDTO;
 import com.techgustavorodrigues.wsspringmongo.services.UserService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 @RestController
 @RequestMapping(path ="/users")
 public class UserResource {
@@ -28,6 +32,10 @@ public class UserResource {
 	@Autowired
 	private UserService uservice;
 
+	@Operation(summary = "Get All", description = "Get All Users", tags = "Users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "returns all users")
+	})
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = uservice.findAll();
@@ -35,12 +43,21 @@ public class UserResource {
 		return ResponseEntity.ok().body(listDto);
 	}
 	
+	@Operation(summary = "Get By ID", description = "Get User By ID", tags = "Users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "returns user by ID"),
+			@ApiResponse(responseCode = "404", description = "user not found")
+	})
 	@GetMapping(path="/{id}")
 	public ResponseEntity<UserDTO> findbyId(@PathVariable String id) {
 		User obj = uservice.findById(id);
 		return ResponseEntity.ok().body(new UserDTO(obj));
 	}
 	
+	@Operation(summary = "Insert New User", description = "Insert New User", tags = "Users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "new user inserted successfully")
+	})
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody UserDTO objDto) {
 		User obj = uservice.fromDTO(objDto);
@@ -49,6 +66,11 @@ public class UserResource {
 		return ResponseEntity.created(uri).build();
 	}
 	
+	@Operation(summary = "Update By ID", description = "Update User By ID", tags = "Users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "user update successful"),
+			@ApiResponse(responseCode = "404", description = "user not found")
+	})
 	@PutMapping(path="/{id}")
 	public ResponseEntity<Void> update(@RequestBody UserDTO objDto, @PathVariable String id) {
 		User obj = uservice.fromDTO(objDto);
@@ -57,12 +79,22 @@ public class UserResource {
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Operation(summary = "Delete By ID", description = "Delete User By ID", tags = "Users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "user successfully deleted"),
+			@ApiResponse(responseCode = "404", description = "user not found")
+	})
 	@DeleteMapping(path="/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		uservice.delete(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@Operation(summary = "Get Posts By User ID", description = "Get Posts By User ID", tags = "Users")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "returns user post"),
+			@ApiResponse(responseCode = "404", description = "post not found")
+	})
 	@GetMapping(path="/{id}/posts")
 	public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
 		User obj = uservice.findById(id);
