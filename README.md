@@ -29,8 +29,12 @@ The challenge is to create a timer and it should have the following functionalit
 
 <h3>To access the API documentation, simply start the project on your machine and access the following localhost port:</h3>
 <a>localhost:8080/swagger-ui/index.html#/</a>
+</br></br>
+<p>example of what you will access</p>
 
- <h1 id="technologies"> 🧠 Technologies</h1>
+<Image>![swagger (1)](https://github.com/Rodrigues-Gustavo/api_spring_mongodb/assets/102608021/f3f7719a-1142-4329-969b-252e13945e70)</Image>
+
+<h1 id="technologies"> 🧠 Technologies</h1>
 
 <li>Java and Spring Boot</li>
 <li>MongoDB</li>
